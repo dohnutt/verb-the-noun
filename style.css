@@ -6,6 +6,7 @@ html {
 	font-family: 'Roboto Condensed', Arial, sans-serif;
 	font-size: 1.125rem;
 	height: 100%;
+	overflow-x: hidden;
 }
 
 body {
@@ -26,10 +27,11 @@ h1 {
 	text-transform: uppercase;
 	font-style: italic;
 	margin: 1.5rem auto -1.5rem;
-	padding: 6vh 1rem 7vh;
+	padding: 6vh 1em 7vh;
 	border: 1px solid white;
 	border-radius: 1em;
-	max-width: 16em;
+	width: max-content;
+	max-width: 100%;
 	position: relative;
 	z-index: 0;
 }
@@ -92,6 +94,8 @@ footer {
 	h1 {
 		font-size: 13vmin;
 		border-radius: 0.5em;
+		padding-left: 1rem;
+		padding-right: 1rem;
 	}
 
 	button {
