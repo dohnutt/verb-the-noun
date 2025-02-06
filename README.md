@@ -1,2 +1,3 @@
-# verb-the-noun
+# Verb the noun
  
+Pierre Poilievre's slogan generator.

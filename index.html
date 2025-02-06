@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+    <title>Verb the Noun — Pierre Poilievre's slogan generator</title>
+    <meta name="description" content="Axe the budget, build the tax, stop the homes. A slogan generator for Pierre Poilievre's campaign team.">
+    <link rel="canonical" href="https://verbthenoun.netlify.app">
+
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Verb the Noun — Pierre Poilievre's slogan generator">
+    <meta property="og:description" content="Axe the budget, build the tax, stop the homes. A slogan generator for Pierre Poilievre's campaign team.">
+    <meta property="og:url" content="https://verbthenoun.netlify.app">
+    <meta property="og:site_name" content="Verb the Noun">
+    <meta name="twitter:card" content="summary">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" type="text/css" media="all">
+</head>
+<body>
+    <main>
+        <p>Pierre Poilievre's slogan generator</p>
+
+		<h1>
+			<span class="verb">Verb</span>
+            the
+            <span class="noun">noun</span>
+		</h1>
+
+        <button type="button">Verb that noun!</button>
+	</main>
+
+    <footer>
+        Paid for by the <a href="https://bsky.app/profile/dohnutt.com">🍁 Gubbermint of Canada</a>.
+    </footer>
+
+    <script type="text/javascript">
+    const verbs = ['Axe', 'Stop', 'Build', 'Fix', 'F*ck', 'Defund'];
+    const nouns = ['Tax', 'Crime', 'Homes', 'Budget', 'Drugs', 'Trudeau', 'CBC'];
+    const verbEl = document.querySelector('.verb');
+    const nounEl = document.querySelector('.noun');
+
+    document.querySelector('button').addEventListener('click', verbTheNoun)
+
+    function verbTheNoun() {
+        let verb = Math.floor(Math.random() * verbs.length);
+        let noun = Math.floor(Math.random() * nouns.length);
+
+        verbEl.textContent = verbs[verb];
+        nounEl.textContent = nouns[noun];
+    }
+
+    verbTheNoun();
+    </script>
+</body>
+</html>
