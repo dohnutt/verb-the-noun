@@ -33,38 +33,73 @@
 </head>
 <body>
     <main>
-        <p>
-            Pierre Poilievre's slogan generator
+        <div>
+            Pierre Poilievre's <a href="#official">official<span class="red">*</span></a> slogan generator
             <img src="./assets/favicon-96x96.png" width="60" height="60" alt="Pierre Poilievre as a floating smiling head" class="pp">
-        </p>
+        </div>
 
-		<h1>
-			<span class="verb">Verb</span>
-            the
-            <span class="noun">noun</span>
-		</h1>
+        <figure>
+            <img src="./assets/pee-air.jpg" alt="Pierre Poilievre standing at a podium" width="1280" height="720">
+            <div class="sign">
+                <h1>
+                    <span class="verb">Verb</span>
+                    <small class="article">the</small>
+                    <span class="noun">noun</span>
+                </h1>
+                <h2>
+                    <span class="verb-fr">Verb</span>
+                    <small class="article-fr">le</small>
+                    <span class="noun-fr">noun</span>
+                </h2>
+            </div>
+        </figure>
 
         <button type="button">Verb the noun!</button>
+        
+        <details style="display: none">
+            <summary><h4 style="display: inline">Verb the settings</h4></summary>
+
+            <form action="/" method="POST">
+                <label>
+                    <input type="checkbox" />
+                    Idk do something
+                </label>
+            </form>
+        </details>
 	</main>
 
     <footer>
-        Paid for by the <a href="https://bsky.app/profile/dohnutt.com">🍁 Gubbermint of Canada</a>.
+        Paid for by the <a href="https://github.com/dohnutt/verb-the-noun"><img src="./assets/flag.png" alt="Canada flag" width="25" height="16" class="flag">Gubbermint of Canada</a>
+
+        <hr />
+
+        <small id="official"><span class="red">*</span> not official</small>
     </footer>
 
     <script type="text/javascript">
-    const verbs = ['Axe', 'Stop', 'Build', 'Fix', 'F*ck', 'Defund', 'Secure', 'End'];
-    const nouns = ['tax', 'crime', 'homes', 'budget', 'drugs', 'Trudeau', 'CBC', 'border', 'slogans', 'woke agenda'];
-    const verbEl = document.querySelector('.verb');
-    const nounEl = document.querySelector('.noun');
+    const enVerbs = ['Axe', 'Stop', 'Build', 'Fix', 'F*ck', 'Defund', 'Secure', 'End'];
+    const enNouns = ['tax', 'crime', 'homes', 'budget', 'drugs', 'Trudeau', 'CBC', 'border', 'slogans', 'woke agenda'];
+    const frVerbs = ['Abolir', 'Arrêtons', 'Construire', 'Réparer', 'Foutre', 'Définancer', 'Sécuriser', 'Mettre fin'];
+    const frNouns = ['taxe', 'crime', 'maisons', 'budget', 'drogues', 'Trudeau', 'Radio-Canada', 'frontière', 'slogans', 'agenda woke'];
+    const frArticles = ['le', 'la', 'les'];
+    const enVerbEl = document.querySelector('.verb');
+    const enNounEl = document.querySelector('.noun');
+    const frVerbEl = document.querySelector('.verb-fr');
+    const frNounEl = document.querySelector('.noun-fr');
+    const frArticleEl = document.querySelector('.article-fr');
 
     document.querySelector('button').addEventListener('click', verbTheNoun)
 
     function verbTheNoun() {
-        let verb = Math.floor(Math.random() * verbs.length);
-        let noun = Math.floor(Math.random() * nouns.length);
+        let verb = Math.floor(Math.random() * enVerbs.length);
+        let noun = Math.floor(Math.random() * enNouns.length);
+        let article = Math.floor(Math.random() * frArticles.length);
 
-        verbEl.textContent = verbs[verb];
-        nounEl.textContent = nouns[noun];
+        enVerbEl.textContent = enVerbs[verb];
+        enNounEl.textContent = enNouns[noun];
+        frVerbEl.textContent = frVerbs[verb];
+        frNounEl.textContent = frNouns[noun];
+        frArticleEl.textContent = frArticles[article];
     }
 
     verbTheNoun();
