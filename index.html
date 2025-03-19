@@ -56,13 +56,23 @@
 
         <button type="button">Verb the noun!</button>
         
-        <details style="display: none">
+        <details>
             <summary><h4 style="display: inline">Verb the settings</h4></summary>
 
             <form action="/" method="POST">
                 <label>
-                    <input type="checkbox" />
-                    Idk do something
+                    <input type="checkbox" name="funny" />
+                    Even dumber
+                </label>
+
+                <label>
+                    <input type="checkbox" name="freetext" />
+                    Free reign (type as you please)
+                </label>
+
+                <label>
+                    <input type="checkbox" name="ppvance" />
+                    Pease Mistew Cawney
                 </label>
             </form>
         </details>
@@ -77,29 +87,96 @@
     </footer>
 
     <script type="text/javascript">
-    const enVerbs = ['Axe', 'Stop', 'Build', 'Fix', 'F*ck', 'Defund', 'Secure', 'End'];
-    const enNouns = ['tax', 'crime', 'homes', 'budget', 'drugs', 'Trudeau', 'CBC', 'border', 'slogans', 'woke agenda'];
-    const frVerbs = ['Abolir', 'Arrêtons', 'Construire', 'Réparer', 'Foutre', 'Définancer', 'Sécuriser', 'Mettre fin'];
-    const frNouns = ['taxe', 'crime', 'maisons', 'budget', 'drogues', 'Trudeau', 'Radio-Canada', 'frontière', 'slogans', 'agenda woke'];
-    const frArticles = ['le', 'la', 'les'];
+    const en = {
+        verbs: ['Axe', 'Stop', 'Build', 'Fix', 'F*ck', 'Defund', 'Secure', 'End'],
+        nouns: ['tax', 'crime', 'homes', 'budget', 'drugs', 'Trudeau', 'CBC', 'border', 'slogans', 'woke agenda'],
+        articles: ['the', 'the', 'the']
+    };
+    const fr = {
+        verbs: ['Abolir', 'Arrêtons', 'Construire', 'Réparer', 'Foutre', 'Définancer', 'Sécuriser', 'Mettre fin'],
+        nouns: ['taxe', 'crime', 'maisons', 'budget', 'drogues', 'Trudeau', 'Radio-Canada', 'frontière', 'slogans', 'agenda woke'],
+        articles: ['le', 'la', 'les']
+    };
+
+    const origEn = Object.assign({},en);
+    const origFr = Object.assign({},fr);
+    
     const enVerbEl = document.querySelector('.verb');
     const enNounEl = document.querySelector('.noun');
     const frVerbEl = document.querySelector('.verbe');
     const frNounEl = document.querySelector('.nom');
+    const enArticleEl = document.querySelector('.article');
     const frArticleEl = document.querySelector('.article-fr');
+
+    document.querySelector('input[name="funny"]').addEventListener('change', e => {
+        if (e.target.checked) {
+            en.verbs = ['Pull', 'Fondle', 'Bend', 'Polish', 'F*ck', 'Privatize', 'Tax', 'Touch', 'Poop'];
+            en.nouns = ['finger', 'shaft', 'balls', 'knee', 'knob', 'Libs', 'election', 'planet', 'healthcare', 'Carney', 'Justin', 'PP', 'pants'];
+            fr.verbs = ['Tirer', 'Peloter', 'Plier', 'Polir', 'Baiser', 'Privatiser', 'Taxer', 'Toucher', 'Chier'];
+            fr.nouns = ['doigt', 'axe', 'couilles', 'genou', 'bouton', 'Libs', 'élection', 'planète', 'santé', 'Carney', 'Justin', 'PP', 'pantalon'];
+
+        } else {
+            en.verbs = origEn.verbs;
+            en.nouns = origEn.nouns;
+            fr.verbs = origFr.verbs;
+            fr.nouns = origFr.nouns;
+        }
+
+        verbTheNoun();
+    });
+
+    document.querySelector('input[name="freetext"]').addEventListener('change', e => {
+        if (e.target.checked) {
+            enVerbEl.setAttribute('contenteditable', true);
+            enNounEl.setAttribute('contenteditable', true);
+            enArticleEl.setAttribute('contenteditable', true);
+
+            frVerbEl.setAttribute('contenteditable', true);
+            frNounEl.setAttribute('contenteditable', true);
+            frArticleEl.setAttribute('contenteditable', true);
+        } else {
+            enVerbEl.removeAttribute('contenteditable');
+            enNounEl.removeAttribute('contenteditable');
+            enArticleEl.removeAttribute('contenteditable');
+
+            frVerbEl.removeAttribute('contenteditable');
+            frNounEl.removeAttribute('contenteditable');
+            frArticleEl.removeAttribute('contenteditable');
+        }
+    });
+
+    document.querySelector('input[name="ppvance"]').addEventListener('change', e => {
+        if (e.target.checked) {
+            document.querySelector('figure img').src = './assets/pee-air-pwease.jpg';
+            en.articles = ['da', 'da'];
+            fr.articles = ['da', 'de'];
+
+            en.verbs = en.verbs.map(verb => verb.replace('l', 'w'));
+            en.nouns = en.nouns.map(noun => noun.replace('l', 'w'));
+            fr.verbs = fr.verbs.map(verb => verb.replace('l', 'w'));
+            fr.nouns = fr.nouns.map(noun => noun.replace('l', 'w'));
+        } else {
+            document.querySelector('figure img').src = './assets/pee-air.jpg';
+            en.verbs = origEn.verbs;
+            en.nouns = origEn.nouns;
+            fr.verbs = origFr.verbs;
+            fr.nouns = origFr.nouns;
+        }
+    });
 
     document.querySelector('button').addEventListener('click', verbTheNoun)
 
     function verbTheNoun() {
-        let verb = Math.floor(Math.random() * enVerbs.length);
-        let noun = Math.floor(Math.random() * enNouns.length);
-        let article = Math.floor(Math.random() * frArticles.length);
+        let verb = Math.floor(Math.random() * en.verbs.length);
+        let noun = Math.floor(Math.random() * en.nouns.length);
+        let article = Math.floor(Math.random() * fr.articles.length);
 
-        enVerbEl.textContent = enVerbs[verb];
-        enNounEl.textContent = enNouns[noun];
-        frVerbEl.textContent = frVerbs[verb];
-        frNounEl.textContent = frNouns[noun];
-        frArticleEl.textContent = frArticles[article];
+        enVerbEl.textContent = en.verbs[verb];
+        enNounEl.textContent = en.nouns[noun];
+        enArticleEl.textContent = en.articles[article];
+        frVerbEl.textContent = fr.verbs[verb];
+        frNounEl.textContent = fr.nouns[noun];
+        frArticleEl.textContent = fr.articles[article];
     }
 
     verbTheNoun();
