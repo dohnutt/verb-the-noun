@@ -150,11 +150,10 @@
             document.querySelector('figure img').src = './assets/pee-air-pwease.jpg';
             en.articles = ['da', 'da'];
             fr.articles = ['da', 'de'];
-
-            en.verbs = en.verbs.map(verb => verb.replace('l', 'w'));
-            en.nouns = en.nouns.map(noun => noun.replace('l', 'w'));
-            fr.verbs = fr.verbs.map(verb => verb.replace('l', 'w'));
-            fr.nouns = fr.nouns.map(noun => noun.replace('l', 'w'));
+            en.verbs = en.verbs.map(verb => babyfy(verb));
+            en.nouns = en.nouns.map(noun => babyfy(noun));
+            fr.verbs = fr.verbs.map(verb => babyfy(verb));
+            fr.nouns = fr.nouns.map(noun => babyfy(noun));
         } else {
             document.querySelector('figure img').src = './assets/pee-air.jpg';
             en.verbs = origEn.verbs;
@@ -165,6 +164,14 @@
     });
 
     document.querySelector('button').addEventListener('click', verbTheNoun)
+
+    function babyfy(str) {
+        return str
+            .replaceAll('l', 'w')
+            .replace('r', 'w')
+            .replace('th', 'f')
+            .replace('sh', 'ss')
+    }
 
     function verbTheNoun() {
         let verb = Math.floor(Math.random() * en.verbs.length);
