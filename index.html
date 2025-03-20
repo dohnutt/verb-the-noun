@@ -54,7 +54,7 @@
             </div>
         </figure>
 
-        <button type="button">Verb the noun!</button>
+        <button type="button" id="verb-it">Verb the noun!</button>
         
         <details>
             <summary><h4 style="display: inline">Verb the settings</h4></summary>
@@ -71,7 +71,7 @@
                 </label>
 
                 <label>
-                    <input type="checkbox" name="ppvance" />
+                    <input type="checkbox" name="baby" />
                     Pease Mistew Cawney
                 </label>
             </form>
@@ -89,17 +89,19 @@
     <script type="text/javascript">
     const en = {
         verbs: ['Axe', 'Stop', 'Build', 'Fix', 'F*ck', 'Defund', 'Secure', 'End'],
-        nouns: ['tax', 'crime', 'homes', 'budget', 'drugs', 'Trudeau', 'CBC', 'border', 'slogans', 'woke agenda'],
+        nouns: ['tax', 'crime', 'homes', 'budget', 'drugs', 'Trudeau', 'CBC', 'border', 'slogans', 'woke agenda', 'Carney'],
         articles: ['the', 'the', 'the']
     };
     const fr = {
         verbs: ['Abolir', 'Arrêtons', 'Construire', 'Réparer', 'Foutre', 'Définancer', 'Sécuriser', 'Mettre fin'],
-        nouns: ['taxe', 'crime', 'maisons', 'budget', 'drogues', 'Trudeau', 'Radio-Canada', 'frontière', 'slogans', 'agenda woke'],
+        nouns: ['taxe', 'crime', 'maisons', 'budget', 'drogues', 'Trudeau', 'Radio-Canada', 'frontière', 'slogans', 'agenda woke', 'Carney'],
         articles: ['le', 'la', 'les']
     };
 
     const origEn = Object.assign({},en);
     const origFr = Object.assign({},fr);
+    let currentEn = Object.assign({},en);
+    let currentFr = Object.assign({},fr);
     
     const enVerbEl = document.querySelector('.verb');
     const enNounEl = document.querySelector('.noun');
@@ -108,24 +110,25 @@
     const enArticleEl = document.querySelector('.article');
     const frArticleEl = document.querySelector('.article-fr');
 
-    document.querySelector('input[name="funny"]').addEventListener('change', e => {
-        if (e.target.checked) {
-            en.verbs = ['Pull', 'Bend', 'Polish', 'F*ck', 'Privatize', 'Tax', 'Touch', 'Poop'];
-            en.nouns = ['finger', 'shaft', 'balls', 'knee', 'knob', 'Libs', 'election', 'planet', 'healthcare', 'Carney', 'Justin', 'PP', 'pants'];
-            fr.verbs = ['Tirer', 'Plier', 'Polir', 'Baiser', 'Privatiser', 'Taxer', 'Toucher', 'Chier'];
-            fr.nouns = ['doigt', 'axe', 'couilles', 'genou', 'bouton', 'Libs', 'élection', 'planète', 'santé', 'Carney', 'Justin', 'PP', 'pantalon'];
+    const checkboxFunny = document.querySelector('input[name="funny"]');
+    const checkboxFreetext = document.querySelector('input[name="freetext"]');
+    const checkboxBaby = document.querySelector('input[name="baby"]');
+    const button = document.getElementById('verb-it');
 
-        } else {
+    checkboxFunny.addEventListener('change', e => {
+        toggleFunnyWords(e.target.checked);
+
+        if (!e.target.checked) {
+            en.articles = origEn.articles;
             en.verbs = origEn.verbs;
             en.nouns = origEn.nouns;
+            fr.articles = origFr.articles;
             fr.verbs = origFr.verbs;
             fr.nouns = origFr.nouns;
         }
-
-        verbTheNoun();
     });
 
-    document.querySelector('input[name="freetext"]').addEventListener('change', e => {
+    checkboxFreetext.addEventListener('change', e => {
         if (e.target.checked) {
             enVerbEl.setAttribute('contenteditable', true);
             enNounEl.setAttribute('contenteditable', true);
@@ -145,35 +148,57 @@
         }
     });
 
-    document.querySelector('input[name="ppvance"]').addEventListener('change', e => {
-        if (e.target.checked) {
-            document.querySelector('figure img').src = './assets/pee-air-pwease.jpg';
-            en.articles = ['da', 'da'];
-            fr.articles = ['da', 'de'];
-            en.verbs = en.verbs.map(verb => babyfy(verb));
-            en.nouns = en.nouns.map(noun => babyfy(noun));
-            fr.verbs = fr.verbs.map(verb => babyfy(verb));
-            fr.nouns = fr.nouns.map(noun => babyfy(noun));
-        } else {
-            document.querySelector('figure img').src = './assets/pee-air.jpg';
+    checkboxBaby.addEventListener('change', e => {
+        toggleBabyTalk(e.target.checked);
+
+        if (!e.target.checked) {
+            en.articles = origEn.articles;
             en.verbs = origEn.verbs;
             en.nouns = origEn.nouns;
+            fr.articles = origFr.articles;
             fr.verbs = origFr.verbs;
             fr.nouns = origFr.nouns;
         }
     });
 
-    document.querySelector('button').addEventListener('click', verbTheNoun)
+    button.addEventListener('click', verbTheNoun)
+
+    function toggleFunnyWords(bool) {
+        if (bool) {
+            en.verbs = en.verbs.concat(['Pull', 'Bend', 'Polish', 'F*ck', 'Privatize', 'Tax', 'Touch', 'Poop']);
+            en.nouns = en.nouns.concat(['finger', 'shaft', 'balls', 'knee', 'knob', 'Libs', 'election', 'planet', 'healthcare', 'Carney', 'Justin', 'PP', 'pants']);
+            fr.verbs = fr.verbs.concat(['Tirer', 'Plier', 'Polir', 'Baiser', 'Privatiser', 'Taxer', 'Toucher', 'Chier']);
+            fr.nouns = fr.nouns.concat(['doigt', 'axe', 'couilles', 'genou', 'bouton', 'Libs', 'élection', 'planète', 'santé', 'Carney', 'Justin', 'PP', 'pantalon']);
+        }
+    }
+
+    function toggleBabyTalk(bool) {
+        if (bool) {
+            document.querySelector('figure img').src = './assets/pee-air-pwease.jpg';
+            en.articles = ['da', 'da'];
+            en.verbs = en.verbs.map(verb => babyfy(verb));
+            en.nouns = en.nouns.map(noun => babyfy(noun));
+            fr.articles = ['da', 'de'];
+            fr.verbs = fr.verbs.map(verb => babyfy(verb));
+            fr.nouns = fr.nouns.map(noun => babyfy(noun));
+        } else {
+            document.querySelector('figure img').src = './assets/pee-air.jpg';
+        }
+    }
 
     function babyfy(str) {
         return str
-            .replaceAll('l', 'w')
-            .replace('r', 'w')
-            .replace('th', 'f')
-            .replace('sh', 'ss')
+            .replace(/l/ig, 'w')
+            .replace(/r/ig, 'w')
+            .replace(/th/ig, 'f')
+            .replace(/sh/ig, 'ss')
+            .replace(/Poop/ig, 'Poo poo')
     }
 
     function verbTheNoun() {
+        toggleFunnyWords(checkboxFunny.checked);
+        toggleBabyTalk(checkboxBaby.checked);
+        
         let verb = Math.floor(Math.random() * en.verbs.length);
         let noun = Math.floor(Math.random() * en.nouns.length);
         let article = Math.floor(Math.random() * fr.articles.length);
