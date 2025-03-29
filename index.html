@@ -42,14 +42,14 @@
             <img src="./assets/pee-air.jpg" alt="Pierre Poilievre standing at a podium" width="1280" height="720">
             <div class="sign">
                 <h1>
-                    <span class="verb">Verb</span>
-                    <small class="article">the</small>
-                    <span class="noun">noun</span>
+                    <span class="verb" data-orig="Verb">Verb</span>
+                    <small class="article" data-orig="the">the</small>
+                    <span class="noun" data-orig="noun">noun</span>
                 </h1>
                 <h2>
-                    <span class="verbe">Verbe</span>
-                    <small class="article-fr">le</small>
-                    <span class="nom">nom</span>
+                    <span class="verbe" data-orig="Verbe">Verbe</span>
+                    <small class="article-fr" data-orig="le">le</small>
+                    <span class="nom" data-orig="nom">nom</span>
                 </h2>
             </div>
         </figure>
@@ -158,6 +158,14 @@
             fr.articles = origFr.articles;
             fr.verbs = origFr.verbs;
             fr.nouns = origFr.nouns;
+            
+            enVerbEl.textContent = enVerbEl.getAttribute('data-orig');
+            enNounEl.textContent = enNounEl.getAttribute('data-orig');
+            enArticleEl.textContent = enArticleEl.getAttribute('data-orig');
+            
+            frVerbEl.textContent = frVerbEl.getAttribute('data-orig');
+            frNounEl.textContent = frNounEl.getAttribute('data-orig');
+            frArticleEl.textContent = frArticleEl.getAttribute('data-orig');
         }
     });
 
@@ -181,6 +189,13 @@
             fr.articles = ['da', 'de'];
             fr.verbs = fr.verbs.map(verb => babyfy(verb));
             fr.nouns = fr.nouns.map(noun => babyfy(noun));
+
+            enVerbEl.textContent = babyfy(enVerbEl.textContent);
+            enNounEl.textContent = babyfy(enNounEl.textContent);
+            enArticleEl.textContent = 'da';
+            frVerbEl.textContent = babyfy(frVerbEl.textContent);
+            frNounEl.textContent = babyfy(frNounEl.textContent);
+            frArticleEl.textContent = 'da'
         } else {
             document.querySelector('figure img').src = './assets/pee-air.jpg';
         }
@@ -192,7 +207,8 @@
             .replace(/r/ig, 'w')
             .replace(/th/ig, 'f')
             .replace(/sh/ig, 'ss')
-            .replace(/Poop/ig, 'Poo poo')
+            .replace(/Poop/i, 'Poo poo')
+            .replace(/F\*ck/i, 'Fwick')
     }
 
     function verbTheNoun() {
@@ -204,11 +220,18 @@
         let article = Math.floor(Math.random() * fr.articles.length);
 
         enVerbEl.textContent = en.verbs[verb];
+        enVerbEl.setAttribute('data-orig', en.verbs[verb]);
         enNounEl.textContent = en.nouns[noun];
+        enNounEl.setAttribute('data-orig', en.nouns[noun]);
         enArticleEl.textContent = en.articles[article];
+        enArticleEl.setAttribute('data-orig', en.articles[article]);
+
         frVerbEl.textContent = fr.verbs[verb];
+        frVerbEl.setAttribute('data-orig', fr.verbs[verb]);
         frNounEl.textContent = fr.nouns[noun];
+        frNounEl.setAttribute('data-orig', fr.nouns[noun]);
         frArticleEl.textContent = fr.articles[article];
+        frArticleEl.setAttribute('data-orig', fr.articles[article]);
     }
 
     verbTheNoun();
